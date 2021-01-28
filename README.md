@@ -1,6 +1,6 @@
 # VRE App
 
-![VRE Drive Store](/docs/img/drive.png?raw=true "VRE Drive Store")
+![VRE Drive Store](/docs/img/drive.png?raw=true "VRE Drive Store" | width=200)
 
 The idea is to have one common place where we can view all of VRE's Drive Links and Purchases.
 Also being able to see a timeline is helpful to keep the entire team on one page.
