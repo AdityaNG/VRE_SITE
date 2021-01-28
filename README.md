@@ -1,6 +1,7 @@
 # VRE App
 
-<img src="docs/img/drive.png?raw=true" width=400>
+<img src="docs/img/demo.gif?raw=true" width=400>
+
 
 The idea is to have one common place where we can view all of VRE's Drive Links and Purchases.
 Also being able to see a timeline is helpful to keep the entire team on one page.
@@ -28,7 +29,8 @@ The Purchases section will be the place where we will list all our purchases alo
 There is also a bug report section which allows you to report any issues or features that you would like to see in the future
 All of the above support a comment section for each individual post and search bar.
 
-<img src="docs/img/demo.gif?raw=true" width=400>
+<img src="docs/img/timeline.png?raw=true" width=400>
+
 
 # How to install :
 
@@ -40,6 +42,8 @@ To install the app on Android, press the “Add to home screen” button in the 
 
 The idea is to have all MODs install the app initially for a week and see all the issues that arise.
 Once those issues are ironed out and the app seems stable, the whole team can start using the app.
+
+<img src="docs/img/drive.png?raw=true" width=400>
 
 # Known issues :
 
