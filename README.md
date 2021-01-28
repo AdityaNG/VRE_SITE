@@ -1,6 +1,6 @@
-# VRE App
+# VRE Management
 
-<img src="docs/img/demo.gif?raw=true" width=400>
+<img src="docs/img/demo.gif?raw=true" width=600>
 
 
 The idea is to have one common place where we can view all of VRE's Drive Links and Purchases.
