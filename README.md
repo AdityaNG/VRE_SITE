@@ -28,7 +28,7 @@ The Purchases section will be the place where we will list all our purchases alo
 There is also a bug report section which allows you to report any issues or features that you would like to see in the future
 All of the above support a comment section for each individual post and search bar.
 
-<img src="docs/img/timeline.png?raw=true" width=400>
+<img src="docs/img/demo.gif?raw=true" width=400>
 
 # How to install :
 
