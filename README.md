@@ -1,6 +1,6 @@
 # VRE App
 
-<img src="docs/img/drive.png?raw=true" width=300>
+<img src="docs/img/drive.png?raw=true" width=400>
 
 The idea is to have one common place where we can view all of VRE's Drive Links and Purchases.
 Also being able to see a timeline is helpful to keep the entire team on one page.
@@ -12,9 +12,10 @@ http://vega-racing.web.app/
 # What it does :
 
 The app gives you access to 3 things
-	1. Timeline
-	2. Drive Links
-	3. Purchases
+
+1. Timeline
+2. Drive Links
+3. Purchases
 
 The Timeline is a list of deadlines with a title, short description and an optional link associated with it.
 The link might refer to a document / drive folder with relevant information about that deadline.
@@ -27,7 +28,7 @@ The Purchases section will be the place where we will list all our purchases alo
 There is also a bug report section which allows you to report any issues or features that you would like to see in the future
 All of the above support a comment section for each individual post and search bar.
 
-![VRE Timeline](/docs/img/timeline.png?raw=true "VRE Timeline")
+<img src="docs/img/timeline.png?raw=true" width=400>
 
 # How to install :
 
@@ -46,4 +47,4 @@ Once those issues are ironed out and the app seems stable, the whole team can st
 2. Chrome is best supported. Other browsers have not been tested
 3. Notifications on the app are not always consistent; some notifications get dropped
 
-![Report Bugs](/docs/img/bug.png?raw=true "Report Bugs")
+<img src="docs/img/bug.png?raw=true" width=400>
