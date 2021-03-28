@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "vega-19361"
+  },
+  "targets": {
+    "vega-19361": {
+      "hosting": {
+        "app": [
+          "vega-racing"
+        ]
+      }
+    }
   }
 }
