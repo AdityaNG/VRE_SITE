@@ -292,16 +292,36 @@ function refresh_deadlines() {
     }))
 }
 
+function get_deadline_color(dt, status) {
+    days_left = (new Date(dt) - new Date()) / (60 * 60 * 24 * 1000)
+
+    //console.log(days_left)
+
+    if (status == 'Done') {
+        return '#00FF00' //'green'
+    }
+
+    if (days_left > 40) {
+        return 'white'
+    } else if (days_left > 20) {
+        return 'yellow'
+    }
+
+    return '#FF4444' //'red'
+}
+
 function update_deadline_UI(t) {
     for (key in document.getElementById("timeline_array").innerHTML = "", elements_list = [], last_pos = !0, t)
         if (deadline = t[key], deadline_id = key, ele = document.getElementById(deadline_id), !ele) {
             for (property in timeline_array = document.getElementById("timeline_array"), deadline_ele = DEADLINE_FORMAT, deadline_ele = deadline_ele.split("{{deadline_id}}").join(deadline_id), deadline_ele = deadline_ele.split("{{deadline_date}}").join(new Date(deadline.deadline_date).toDateString()), deadline.deadline_url || (deadline_ele = deadline_ele.replace('<a id="deadline_url" target="_blank" href="{{deadline_url}}"><button class="w3-button w3-round-large"><i class="fa fa-external-link"></i> Link</button></a>', "")), deadline) deadline_ele = deadline_ele.split("{{" + property + "}}").join(deadline[property]);
+            deadline_ele = deadline_ele.split("{{deadline_color}}").join(get_deadline_color(deadline.deadline_date, deadline.deadline_status))
             is_seen(deadline_id, "deadline") || (unseen_deadlines++, set_seen(deadline_id, "deadline", deadline)), deadline.deadline_id = deadline_id, "All" != document.getElementById("sortBy_deadline_department").value && document.getElementById("sortBy_deadline_department").value != deadline.deadline_department || elements_list.push({
                 ele: deadline_ele,
                 data: deadline
             })
         } for (elements_list.push({
-            ele: '<div id="today"></div><br><br><br><div class="container left"><div class="content"><h4>Today</h4></div></div>',
+            ele: '<div id="today"></div><br><br><br><div class="left"><div class="content"><h4>Today, <b>' + (new Date).toDateString() + '</b> </h4></div></div><hr>',
+            //ele: '',
             data: {
                 deadline_date: formatDate((new Date).toDateString())
             }
@@ -323,7 +343,7 @@ function formatDate(t) {
 }
 
 function new_deadline() {
-    $("<p>Would you like to add a new Deadline?</p>").dialog({
+    ("<p>Would you like to add a new Deadline?</p>").dialog({
         modal: !0,
         title: "Add New Deadline",
         show: "blind",
@@ -38661,7 +38681,49 @@ function(t, e) {
     } catch (t) {
         throw console.error(t), new Error("Cannot instantiate firebase-database.js - be sure to load firebase-app.js first.")
     }
-})), search_space = [], LOADED_COOKIE = {}, load_all_cookies(), BUG_REPORT_FORMAT = '<div class="w3-card-4" style="background: white;" id="{{bug_report_id}}"><table style="width: 100%;"><tr><td><p> Bug ID <b style="margin: 10px;" id="bug_report_desc_id">{{bug_report_id}}</b></p></td></tr><tr><td id="displayName"><div style="float: right;"><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}"> {{displayName}}<div></td></tr><tr><td><p style="margin: 10px;" id="bug_report_desc">{{bug_report_desc}}</p></td></tr><tr><td style"font-size: 80%;"><div style="overflow: hidden; height: 50px; float left;"><div style="float:left;" id="comment_rotoator_bug_report_{{bug_report_id}}"></div></div></td><td></td></tr></table><header class="w3-container"></header><footer class="w3-container"><div class="w3-row"><table style="width: 100%;"><tr></tr></table></div></footer></div><br>', DRIVE_LINK_FORMAT = '<div class="w3-card-4" style="background: white; margin: 10px;" id="{{drive_link_id}}"><header class="w3-container"><a target="_blank" id="drive_link_url" href="{{drive_link_url}}"><button class="w3-button w3-round-large" id="driveLinkButton" ><b style="margin: 10px; float: left;" id="drive_link_desc">{{drive_link_desc}}</b></button></a><div style="overflow: hidden; height: 50px; float left;"><button class="w3-button w3-round-large" onclick="edit_drive_link(\'{{drive_link_id}}\')"><i class="fa fa-edit"></i></button><div style="float:left;" id="comment_rotoator_drive_link_{{drive_link_id}}"></div></div><div id="displayName" style="float: right;"><div><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}"> {{displayName}}<div></div></header></div>', DEADLINE_FORMAT = '<div class="container left" id="{{deadline_id}}"><div class="content"><h4 id="deadline_date">{{deadline_date}}</h4><h3 id="deadline_title">{{deadline_title}}</h3><u><p style="font-size: 80%;" id="deadline_status">{{deadline_status}}</p></u><u><p style="font-size: 80%;" id="deadline_department">{{deadline_department}}</p></u><p id="deadline_desc">{{deadline_desc}}</p><button class="w3-button w3-round-large" onclick="edit_deadline(\'{{deadline_id}}\')"><i class="fa fa-edit"></i></button><a id="deadline_url" target="_blank" href="{{deadline_url}}"><button class="w3-button w3-round-large"><i class="fa fa-external-link"></i> Link</button></a></div><br><div class="content deadlineComment" style="width: 500px; float: bottom; display: inline-block;" id="comment_rotoator_deadline_{{deadline_id}}"></div></div>', unseen_deadlines = 0, PURCHASE_FORMAT = '<div class="w3-card-4" style="background: white;" id="{{purchase_id}}"><header class="w3-container"><b><h3 id="purchase_desc">{{purchase_desc}}</h3></b><div style="overflow: hidden; height: 50px;"><div style="float:left;"><button class="w3-button w3-round-large" id="expandButton" onclick="expand_purchase(\'{{purchase_id}}\')"><i class="fa fa-folder"></i></button></div><div style="float:left;" id="comment_rotoator_purchase_{{purchase_id}}"></div></div></header><div class="w3-container" id="purchasecontent" style="display: none;"><div class="w3-third w3-center"><p>Cost : Rs.<b id="purchase_cost">{{purchase_cost}}</b></p><p>Vega Covered : Rs.<b id="purchase_cost_vega">{{purchase_cost_vega}}</b></p><p>Supplier : <b id="purchase_place">{{purchase_place}}</b></p></div><div class="w3-third w3-center"><h4>Bill</h4><img class="zoom" onclick="zoomImage(this)" id="bill_img" src="{{bill_img}}"></div><div class="w3-third w3-center w3-margin-bottom"><h4>Item</h4><img class="zoom" onclick="zoomImage(this)" id="item_img" src="{{item_img}}"></div></div><footer class="w3-container"><div class="w3-row"><table style="width: 100%;"><tr><td style"font-size: 80%;"><u id="purchase_date">{{purchase_date}}</u></td><td id="displayName"><div style="float: right;"><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}"> {{displayName}}<div></td></tr></table></div></footer></div><br>', unseen_purchases = 0, comment_rotoator_counter = {}, comments_rotator_list = {}, ATTENDANCE_FORMAT = '<div class="w3-card-4" style="background: white; margin: 10px;" id="{{attendance_id}}" onclick="openAttendanceButtonClick(\'{{attendance_id}}\')" ><header class="w3-container"><p style="float: left; margin: 10px;" id="attendance_date">{{attendance_date}}</p> <b style="float: right; margin: 10px;" id="attendance_desc">{{attendance_desc}}</b></header><footer class="w3-container"><div class="w3-row"><table style="width: 100%;"><tr></tr></table></div></footer></div>', ATTENDANCE_USER_FORMAT_DETAILED = '<table style="width: 90%;"><tr><td><p id="displayName"><div><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}">{{displayName}}<div></p></td><td><div>{{attendance_count}}</div></td></tr></table><div class="event_list"><span>{{event_list}}</span></div><hr>', ATTENDANCE_USER_FORMAT = '<p id="displayName"><div><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}">{{displayName}}<input style="float: right;" type="checkbox" id="{{uid}}" name="{{uid}}" value="{{uid}}"><div></p><hr>', ATTENDANCE_USER_FORMAT_no_check = '<p id="displayName"><div><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}">{{displayName}}<div></p><hr>', attendance_user_list = [], all_user_list = {}, all_admin_list = {}, all_verified_list = {}, ALL_USER_FORMAT_DETAILED = '<table style="width: 90%;"><tr><td><p id="displayName"><div><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}">{{displayName}}<div></p></td><td>{{admin_status}}</td><td>{{verified_status}}</td></tr></table><hr>';
+})), search_space = [], LOADED_COOKIE = {}, load_all_cookies(),
+BUG_REPORT_FORMAT = '<div class="w3-card-4" style="background: white;" id="{{bug_report_id}}"><table style="width: 100%;"><tr><td><p> Bug ID <b style="margin: 10px;" id="bug_report_desc_id">{{bug_report_id}}</b></p></td></tr><tr><td id="displayName"><div style="float: right;"><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}"> {{displayName}}<div></td></tr><tr><td><p style="margin: 10px;" id="bug_report_desc">{{bug_report_desc}}</p></td></tr><tr><td style"font-size: 80%;"><div style="overflow: hidden; height: 50px; float left;"><div style="float:left;" id="comment_rotoator_bug_report_{{bug_report_id}}"></div></div></td><td></td></tr></table><header class="w3-container"></header><footer class="w3-container"><div class="w3-row"><table style="width: 100%;"><tr></tr></table></div></footer></div><br>', 
+DRIVE_LINK_FORMAT = '<div class="w3-card-4" style="background: white; margin: 10px;" id="{{drive_link_id}}"><header class="w3-container"><a target="_blank" id="drive_link_url" href="{{drive_link_url}}"><button class="w3-button w3-round-large" id="driveLinkButton" ><b style="margin: 10px; float: left;" id="drive_link_desc">{{drive_link_desc}}</b></button></a><div style="overflow: hidden; height: 50px; float left;"><button class="w3-button w3-round-large" onclick="edit_drive_link(\'{{drive_link_id}}\')"><i class="fa fa-edit"></i></button><div style="float:left;" id="comment_rotoator_drive_link_{{drive_link_id}}"></div></div><div id="displayName" style="float: right;"><div><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}"> {{displayName}}<div></div></header></div>',  unseen_deadlines = 0, PURCHASE_FORMAT = '<div class="w3-card-4" style="background: white;" id="{{purchase_id}}"><header class="w3-container"><b><h3 id="purchase_desc">{{purchase_desc}}</h3></b><div style="overflow: hidden; height: 50px;"><div style="float:left;"><button class="w3-button w3-round-large" id="expandButton" onclick="expand_purchase(\'{{purchase_id}}\')"><i class="fa fa-folder"></i></button></div><div style="float:left;" id="comment_rotoator_purchase_{{purchase_id}}"></div></div></header><div class="w3-container" id="purchasecontent" style="display: none;"><div class="w3-third w3-center"><p>Cost : Rs.<b id="purchase_cost">{{purchase_cost}}</b></p><p>Vega Covered : Rs.<b id="purchase_cost_vega">{{purchase_cost_vega}}</b></p><p>Supplier : <b id="purchase_place">{{purchase_place}}</b></p></div><div class="w3-third w3-center"><h4>Bill</h4><img class="zoom" onclick="zoomImage(this)" id="bill_img" src="{{bill_img}}"></div><div class="w3-third w3-center w3-margin-bottom"><h4>Item</h4><img class="zoom" onclick="zoomImage(this)" id="item_img" src="{{item_img}}"></div></div><footer class="w3-container"><div class="w3-row"><table style="width: 100%;"><tr><td style"font-size: 80%;"><u id="purchase_date">{{purchase_date}}</u></td><td id="displayName"><div style="float: right;"><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}"> {{displayName}}<div></td></tr></table></div></footer></div><br>', unseen_purchases = 0, comment_rotoator_counter = {}, comments_rotator_list = {}, ATTENDANCE_FORMAT = '<div class="w3-card-4" style="background: white; margin: 10px;" id="{{attendance_id}}" onclick="openAttendanceButtonClick(\'{{attendance_id}}\')" ><header class="w3-container"><p style="float: left; margin: 10px;" id="attendance_date">{{attendance_date}}</p> <b style="float: right; margin: 10px;" id="attendance_desc">{{attendance_desc}}</b></header><footer class="w3-container"><div class="w3-row"><table style="width: 100%;"><tr></tr></table></div></footer></div>', ATTENDANCE_USER_FORMAT_DETAILED = '<table style="width: 90%;"><tr><td><p id="displayName"><div><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}">{{displayName}}<div></p></td><td><div>{{attendance_count}}</div></td></tr></table><div class="event_list"><span>{{event_list}}</span></div><hr>', ATTENDANCE_USER_FORMAT = '<p id="displayName"><div><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}">{{displayName}}<input style="float: right;" type="checkbox" id="{{uid}}" name="{{uid}}" value="{{uid}}"><div></p><hr>', ATTENDANCE_USER_FORMAT_no_check = '<p id="displayName"><div><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}">{{displayName}}<div></p><hr>', attendance_user_list = [], all_user_list = {}, all_admin_list = {}, all_verified_list = {}, ALL_USER_FORMAT_DETAILED = '<table style="width: 90%;"><tr><td><p id="displayName"><div><img style="border-radius: 50%; width: 20px; height: 20px;" id="photoURL" src="{{photoURL}}">{{displayName}}<div></p></td><td>{{admin_status}}</td><td>{{verified_status}}</td></tr></table><hr>',
+DEADLINE_FORMAT = '<div class="container left" id="{{deadline_id}}"><div class="content"><h4 id="deadline_date">{{deadline_date}}</h4><h3 id="deadline_title">{{deadline_title}}</h3><u><p style="font-size: 80%;" id="deadline_status">{{deadline_status}}</p></u><u><p style="font-size: 80%;" id="deadline_department">{{deadline_department}}</p></u><p id="deadline_desc">{{deadline_desc}}</p><button class="w3-button w3-round-large" onclick="edit_deadline(\'{{deadline_id}}\')"><i class="fa fa-edit"></i></button><a id="deadline_url" target="_blank" href="{{deadline_url}}"><button class="w3-button w3-round-large"><i class="fa fa-external-link"></i> Link</button></a></div><br><div class="content deadlineComment" style="width: 500px; float: bottom; display: inline-block;" id="comment_rotoator_deadline_{{deadline_id}}"></div></div>';
+
+DEADLINE_FORMAT_ALT = '<div class="left" id="{{deadline_id}}"><div style="background-color: {{deadline_color}};" class="content">' +
+'<table><tr>' + 
+'<td>' + 
+'<p id="deadline_date">{{deadline_date}}</p>' + 
+'</td> <td>' +
+'<button class="w3-button w3-round-large" onclick="edit_deadline(\'{{deadline_id}}\')"><i class="fa fa-edit"></i><div class="" style="width: 100%; float: bottom; display: inline-block;" id="comment_rotoator_deadline_{{deadline_id}}"></div>' + 
+'</td>' +
+'<td>' + 
+'</button><a id="deadline_url" target="_blank" href="{{deadline_url}}"><button class="w3-button w3-round-large"><i class="fa fa-external-link"></i> Link</button></a>' +
+'</td>' +
+'<td>' + 
+'<u><p style="font-size: 80%;" id="deadline_status">{{deadline_status}}</p></u>' +
+'</td>' + 
+'<td>' + 
+'<u><p style="font-size: 80%;" id="deadline_department">{{deadline_department}}</p></u>' +
+'</td>' + 
+'</tr></table>' + 
+'<h4 id="deadline_title">{{deadline_title}}</h4><p id="deadline_desc">{{deadline_desc}}</p> </div> </div>' + 
+'<br>';
+
+DEADLINE_FORMAT_ALT_2 = '<div class="container left" id="{{deadline_id}}"><div class="content">' +
+'<table><tr>' + 
+'<td>' +
+'<button class="w3-button w3-round-large" onclick="edit_deadline(\'{{deadline_id}}\')"><i class="fa fa-edit"></i></button><a id="deadline_url" target="_blank" href="{{deadline_url}}"><button class="w3-button w3-round-large"><i class="fa fa-external-link"></i> Link</button></a> <div class="" style="width: 500px; float: bottom; display: inline-block;" id="comment_rotoator_deadline_{{deadline_id}}"></div>' + 
+'</td>' +
+'<td>' + 
+'<u><p style="font-size: 80%;" id="deadline_status">{{deadline_status}}</p></u>' +
+'</td>' + 
+'<td>' + 
+'<u><p style="font-size: 80%;" id="deadline_department">{{deadline_department}}</p></u>' +
+'</td>' + 
+'</tr></table>' + 
+'<h4 id="deadline_title">{{deadline_title}}</h4><p id="deadline_desc">{{deadline_desc}}</p> ' + 
+'<p id="deadline_date">{{deadline_date}}</p>' + 
+'</div> </div><br>';
+
+DEADLINE_FORMAT = DEADLINE_FORMAT_ALT;
+
 var sopen = !1,
     firstLogin = !0,
     vn = "0.0.06",

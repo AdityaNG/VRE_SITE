@@ -144,6 +144,7 @@ body {background: #EEEEEE;overflow-x: hidden;
 
 /*  Timeline  */
 /* The actual timeline (the vertical ruler) */
+/*
 .timeline {
   position: relative;
   max-width: 1200px;
@@ -152,9 +153,10 @@ body {background: #EEEEEE;overflow-x: hidden;
 * {
   box-sizing: border-box;
 }
-
+*/
 
 /* The actual timeline (the vertical ruler) */
+/*
 .timeline::after {
   content: '';
   position: absolute;
@@ -165,6 +167,7 @@ body {background: #EEEEEE;overflow-x: hidden;
   left: 50%;
   margin-left: -3px;
 }
+*/
 
 /* Container around content */
 .container {
