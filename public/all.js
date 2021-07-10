@@ -38946,9 +38946,11 @@ USER_IS_ADMIN = !1, USER_IS_VERYFIED = !1, openPage("LOADING_PAGE"), $("body").c
     switch (navigator.standalone && (t = "standalone-ios"), window.matchMedia("(display-mode: standalone)").matches && (t = "standalone"), console.log("DISPLAY_MODE_LAUNCH:", t), t) {
         case "browser tab":
             $("#install_button")[0].style.display = "block";
+            $("#install_button_div")[0].style.display = "block";
             break;
         default:
             $("#install_button")[0].style.display = "none"
+            $("#install_button_div")[0].style.display = "none"
     }
 }), document.body.onload = function() {
     fb = firebase.initializeApp(config), ref = fb.database().ref(), storage = fb.storage().ref(), provider = new firebase.auth.GoogleAuthProvider, OFFLINE_MODE ? check_offline_mode() : init(), window.addEventListener("HTMLImportsLoaded", (function(t) {
