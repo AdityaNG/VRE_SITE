@@ -38691,7 +38691,7 @@ DEADLINE_FORMAT_ALT = '<div class="left" id="{{deadline_id}}"><div style="backgr
 '<td>' + 
 '<p id="deadline_date">{{deadline_date}}</p>' + 
 '</td> <td>' +
-'<button class="w3-button w3-round-large" onclick="edit_deadline(\'{{deadline_id}}\')"><i class="fa fa-edit"></i><div class="" style="width: 100%; float: bottom; display: inline-block;" id="comment_rotoator_deadline_{{deadline_id}}"></div>' + 
+'<button class="w3-button w3-round-large" onclick="edit_deadline(\'{{deadline_id}}\')"><i class="fa fa-edit"></i>' + 
 '</td>' +
 '<td>' + 
 '</button><a id="deadline_url" target="_blank" href="{{deadline_url}}"><button class="w3-button w3-round-large"><i class="fa fa-external-link"></i> Link</button></a>' +
@@ -38703,7 +38703,9 @@ DEADLINE_FORMAT_ALT = '<div class="left" id="{{deadline_id}}"><div style="backgr
 '<u><p style="font-size: 80%;" id="deadline_department">{{deadline_department}}</p></u>' +
 '</td>' + 
 '</tr></table>' + 
-'<h4 id="deadline_title">{{deadline_title}}</h4><p id="deadline_desc">{{deadline_desc}}</p> </div> </div>' + 
+'<h4 id="deadline_title">{{deadline_title}}</h4><p id="deadline_desc">{{deadline_desc}}</p>' + 
+'<div class="deadlineComment" style="width: 100%; float: bottom; display: inline-block;" id="comment_rotoator_deadline_{{deadline_id}}"></div>' +
+' </div> </div>' + 
 '<br>';
 
 DEADLINE_FORMAT_ALT_2 = '<div class="container left" id="{{deadline_id}}"><div class="content">' +
